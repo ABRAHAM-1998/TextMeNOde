@@ -52,7 +52,8 @@ io.on('connection', (socket) => {
 
   socket.on('typing2', (data) => {
     io.emit(data[1], data)
-    console.log('typing'+ data)
+    console.log(data)
+    console.log(data[1])
   })
 
 })
