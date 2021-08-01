@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const db = require('./database/dbmongo');
+const socket = require('socket.io'); //requires socket.io module
+const fs = require('fs');
 
 var cors = require('cors');
 const chat = require('./Routes/chat');
@@ -33,5 +35,22 @@ db.connect((err) => {
       console.log('CONNECTED TO MONGO :::27017::::');
     }
   });
+//===========================++++++++++++========++++++======+++++=
+
+  const io = socket(server);
+  var count = 0;
+  //Socket.io Connection------------------
+io.on('connection', (socket) => {
+
+  console.log("New socket connection: " + socket.id)
+
+  socket.on('counter', () => {
+      count++;
+      console.log(count)
+      io.emit('counter', count);
+  })
+})
+
+//+++++++++++++++++++++=====================++++++++++++++++++==============
 
 module.exports = { server }
