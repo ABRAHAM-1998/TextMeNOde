@@ -45,8 +45,8 @@ io.on('connection', (socket) => {
   console.log("New socket connection: " + socket.id)
 
   socket.on('typing2', (data) => {
-    io.emit(data[1], data)
-    console.log(data[1])
+    io.emit(data.channelid, data)
+    console.log(data[1],"===",data)
   })
 
 })
