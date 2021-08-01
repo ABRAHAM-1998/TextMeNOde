@@ -47,8 +47,14 @@ io.on('connection', (socket) => {
   socket.on('typing', (data) => {
       count++;
       console.log(count)
-      io.emit(data.channelid, count);
+      io.emit(data, count);
   })
+
+  socket.on('typing2', (data) => {
+    io.emit(data.channelid, data)
+    console.log('typing')
+  })
+
 })
 
 
