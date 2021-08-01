@@ -51,6 +51,10 @@ io.on('connection', (socket) => {
   })
 })
 
+socket.on('typing', (data) => {
+  io.emit(data.channelid, data)
+  console.log(data)
+})
 //+++++++++++++++++++++=====================++++++++++++++++++==============
 
 module.exports = { server }
