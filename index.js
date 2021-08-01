@@ -44,10 +44,10 @@ io.on('connection', (socket) => {
 
   console.log("New socket connection: " + socket.id)
 
-  socket.on('typing', () => {
+  socket.on('typing', (data) => {
       count++;
       console.log(count)
-      io.emit('currentChannelId', count);
+      io.emit(data.channelid, count);
   })
 })
 
