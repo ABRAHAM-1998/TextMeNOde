@@ -6,32 +6,27 @@ const { ObjectId } = require("mongodb");
 
 chat.lastseen = (req, res) => {
     console.log(req.body)
-    db.getDB().collection('lastseen').findOne({ _id:ObjectId(req.body.uid)},(err, result) => {
+    db.getDB().collection('lastseen').findOne({ _id: ObjectId(req.body.uid) }, (err, result) => {
         if (err)
             throw err;
         else if (result == null || result == '') {
-            db.getDB().collection('lastseen').insertOne(req.body,(err, result) => {
+            db.getDB().collection('lastseen').insertOne(req.body, (err, result) => {
                 if (err) throw err
                 else {
-                    res.json({ status: true, message: 'succesfully done' })
-                    console.log(result)
+                    res.json({ status: true, message: 'succesfully created' })
 
-        
                 }
             })
-        
 
-            res.json({ status: false, message: 'INVALID_USER' })
-            console.log(result)
 
         } else {
-            db.getDB().collection('lastseen').updateOne({ _id: ObjectId(req.body.uid) },{ $set: { lastseen: req.body.lastseen }}, (err, result) => {
-                        if (err) throw err
-                        else {
-                            res.json({ status: true, message: "saved" })
-                            console.log(result)
-                        }
-                    })
+            db.getDB().collection('lastseen').updateOne({ _id: ObjectId(req.body.uid) }, { $set: { lastseen: req.body.lastseen } }, (err, result) => {
+                if (err) throw err
+                else {
+                    res.json({ status: true, message: "saved" })
+                    console.log(result)
+                }
+            })
 
         }
 
