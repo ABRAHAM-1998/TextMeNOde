@@ -16,7 +16,7 @@ app.use(cors())
 const Chat = require('./Routes/chat');
 app.use(require('./Routes/chat'));
 
-app.post("/Chat",chat.createChat);
+app.post("/lastseen",chat.lastseen);
 
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 //PORT
