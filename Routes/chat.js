@@ -13,7 +13,6 @@ chat.lastseen = (req, res) => {
             db.getDB().collection('lastseen').insertOne(req.body, (err, result) => {
                 if (err) throw err
                 else {
-                    res.json({ status: true, message: 'succesfully created' })
 
                 }
             })
