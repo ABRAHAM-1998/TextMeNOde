@@ -19,7 +19,8 @@ chat.lastseen = (req, res) => {
 
 
         } else {
-            db.getDB().collection('lastseen').updateOne({ uid: req.body.uid }, { $set: { lastseen: req.body.lastseen ,touid:req.body.touid} }, (err, result) => {
+            db.getDB().collection('lastseen').updateOne({ uid: req.body.uid },
+                 { $set: { lastseen: req.body.lastseen ,touid:req.body.touid} }, (err, result) => {
                 if (err) throw err
                 else {
                     db.getDB().collection('lastseen').findOne({ uid:req.body.touid}, (err, result) => {
