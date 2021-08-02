@@ -5,7 +5,7 @@ const { ObjectId } = require("mongodb");
 
 
 chat.lastseen = (req, res) => {
-    db.getDB().collection('lastseen').insertOne( req.body, (err, result) => {
+    db.getDB().collection('lastseen').insertOne({ _id: ObjectId(req.body.uid) }, (err, result) => {
         if (err) throw err
         else {
             res.json({ status: true, message: "saved" })
