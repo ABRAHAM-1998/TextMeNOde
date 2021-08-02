@@ -10,7 +10,7 @@ chat.lastseen = (req, res) => {
         if (err)
             throw err;
         else if (result == null || result == '') {
-            db.getDB().collection('lastseen').insertOne({_id:ObjectId(req.body.uid)},req.body,(err, result) => {
+            db.getDB().collection('lastseen').insertOne({_id:req.body.uid,lastsceen:req.body.lastseen},(err, result) => {
                 if (err) throw err
                 else {
                     res.json({ status: true, message: 'succesfully done' })
