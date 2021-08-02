@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 
 chat.lastseen = (req, res) => {
     console.log(req.body)
-    db.getDB().collection('lastseen').findOne({ _id: ObjectId(req.body.uid) }, (err, result) => {
+    db.getDB().collection('lastseen').findOne({ uid:req.body.uid}, (err, result) => {
         if (err)
             throw err;
         else if (result == null || result == '') {
@@ -20,7 +20,7 @@ chat.lastseen = (req, res) => {
 
 
         } else {
-            db.getDB().collection('lastseen').updateOne({ _id: ObjectId(req.body.uid) }, { $set: { lastseen: req.body.lastseen } }, (err, result) => {
+            db.getDB().collection('lastseen').updateOne({ uid: req.body.uid }, { $set: { lastseen: req.body.lastseen } }, (err, result) => {
                 if (err) throw err
                 else {
                     res.json({ status: true, message: "saved" })
