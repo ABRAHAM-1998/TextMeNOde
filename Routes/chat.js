@@ -6,7 +6,7 @@ const { ObjectId } = require("mongodb");
 
 chat.lastseen = (req, res) => {
     console.log(req.body)
-    db.getDB().collection('lastseen').findOne({ uid:req.body.uid}, (err, result) => {
+    db.getDB().collection('lastseen').findOne({ uid: req.body.uid }, (err, result) => {
         if (err)
             throw err;
         else if (result == null || result == '') {
@@ -20,16 +20,22 @@ chat.lastseen = (req, res) => {
 
         } else {
             db.getDB().collection('lastseen').updateOne({ uid: req.body.uid },
-                 { $set: { lastseen: req.body.lastseen ,touid:req.body.touid} }, (err, result) => {
-                if (err) throw err
-                else {
-                    db.getDB().collection('lastseen').findOne({ uid:req.body.touid}, (err, result) => {
-                        if (err)
-                            throw err;
-                    res.json({ status: true, message: result.lastseen})
-                    })
-                }
-            })
+                { $set: { lastseen: req.body.lastseen, touid: req.body.touid } }, (err, result) => {
+                    if (err) throw err
+                    else {
+                        db.getDB().collection('lastseen').findOne({ uid: req.body.touid }, (err, result) => {
+                            if (err) {
+                                throw err;
+                                console.log(result)
+                            }
+                            else if (result == null || result == '') {
+                                res.json({ status: true, message: "dissabled" })
+
+                            }else
+                            res.json({ status: true, message: result.lastseen })
+                        })
+                    }
+                })
 
         }
 
