@@ -5,12 +5,16 @@ const { ObjectId } = require("mongodb");
 
 
 chat.lastseen = (req, res) => {
-    db.getDB().collection('lastseen').insertOne({ _id: ObjectId(req.body.uid) }, (err, result) => {
-        if (err) throw err
-        else {
-            res.json({ status: true, message: "saved" })
-            console.log(result.ops)
+    db.getDB().collection('lastseen').findOne({ _id: ObjectId(req.body.uid) }, (err, result) => {
+        if (err)
+            throw err;
+        else if (result == null) {
+            res.json({ status: false, message: 'INVALID_USER' })
+        } else {
+            res.json({ status: true, message: ' Login SUCCESS', data: result })
+            console.log(result)
         }
+
     })
 }
 //===================================================================
