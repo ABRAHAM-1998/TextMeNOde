@@ -14,8 +14,14 @@ chat.lastseen = (req, res) => {
             console.log(result)
 
         } else {
-            res.json({ status: true, message: ' Login SUCCESS', data: result })
-            console.log(result)
+            db.getDB().collection('lastseen').updateOne({ _id: ObjectId(req.body.uid) },{ $set: { lastseen: req.body.lastseen }}, (err, result) => {
+                        if (err) throw err
+                        else {
+                            res.json({ status: true, message: "saved" })
+                            console.log(result)
+                        }
+                    })
+
         }
 
     })
